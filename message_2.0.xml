@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://modeler.netgrif.com/petriflow_schema.xsd">
+	<id>message</id>
+	<initials>Message</initials>
+	<title>Message</title>
+	<defaultRole>true</defaultRole>
+	<transitionRole>false</transitionRole>
+	<!-- TRANSACTIONS -->
+	<!-- ROLES -->
+	<role>
+		<id>teamLeader</id>
+		<title>TeamLeader</title>
+	</role>
+	<role>
+		<id>teamMember</id>
+		<title>TeamMember</title>
+	</role>
+	<!-- PROCESS ROLE REFS -->
+	<!-- PROCESS USER REFS -->
+	<!-- DATA -->
+	<data type="text">
+		<id>text_0</id>
+		<title>Správa</title>
+		<desc>Tu by bolo optimálne meno odosielatela</desc>
+		<values>area</values>
+	</data>
+	<data type="fileList">
+		<id>fileList_0</id>
+		<title>Prílohy</title>
+		<placeholder>Vybrať prílohu</placeholder>
+	</data>
+	<!-- I18NS -->
+	<!-- TRANSITIONS -->
+	<transition>
+		<id>t1</id>
+		<x>711</x>
+		<y>126</y>
+		<layout>
+			<offset>0</offset>
+		</layout>
+		<label>createMessage</label>
+		<assignPolicy>auto</assignPolicy>
+		<dataGroup>
+			<id>DataGroup_0</id>
+			<dataRef>
+				<id>text_0</id>
+				<logic>
+					<behavior>editable</behavior>
+					<behavior>required</behavior>
+				</logic>
+				<layout>
+					<x>0</x>
+					<y>0</y>
+					<rows>2</rows>
+					<cols>3</cols>
+					<offset>0</offset>
+					<template>material</template>
+					<appearance>outline</appearance>
+				</layout>
+			</dataRef>
+			<dataRef>
+				<id>fileList_0</id>
+				<logic>
+					<behavior>editable</behavior>
+				</logic>
+				<layout>
+					<x>3</x>
+					<y>0</y>
+					<rows>2</rows>
+					<cols>1</cols>
+					<offset>0</offset>
+					<template>material</template>
+				</layout>
+			</dataRef>
+		</dataGroup>
+		<event type="finish">
+			<id>t1_finish</id>
+			<actions phase="pre">
+				<action>
+				def existChat = findCases( { it.processIdentifier.eq("5fb3747c0a975a1b77cb1c19_chat") })
+				
+				if(!existChat){
+					createCase("5fb3747c0a975a1b77cb1c19_chat","Tímová Komunikácia")
+				}</action>
+			</actions>
+		</event>
+	</transition>
+	<!-- PLACES -->
+	<!-- ARCS -->
+</document>

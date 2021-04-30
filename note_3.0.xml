@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://modeler.netgrif.com/petriflow_schema.xsd">
+	<id>note</id>
+	<initials>Note</initials>
+	<title>Note</title>
+	<defaultRole>true</defaultRole>
+	<transitionRole>false</transitionRole>
+	<!-- TRANSACTIONS -->
+	<!-- ROLES -->
+	<role>
+		<id>teamLeader</id>
+		<title>TeamLeader</title>
+	</role>
+	<role>
+		<id>teamMember</id>
+		<title>TeamMember</title>
+	</role>
+	<!-- PROCESS ROLE REFS -->
+	<!-- PROCESS USER REFS -->
+	<!-- DATA -->
+	<data type="text">
+		<id>text_0</id>
+		<title>Poznamka</title>
+	</data>
+	<data type="date">
+		<id>date_0</id>
+		<title>Dátum</title>
+	</data>
+	<!-- I18NS -->
+	<!-- TRANSITIONS -->
+	<transition>
+		<id>t1</id>
+		<x>689</x>
+		<y>130</y>
+		<layout>
+			<offset>0</offset>
+		</layout>
+		<label>createNote/All</label>
+		<assignPolicy>auto</assignPolicy>
+		<dataGroup>
+			<id>DataGroup_0</id>
+			<dataRef>
+				<id>text_0</id>
+				<logic>
+					<behavior>editable</behavior>
+					<behavior>required</behavior>
+				</logic>
+				<layout>
+					<x>0</x>
+					<y>0</y>
+					<rows>1</rows>
+					<cols>3</cols>
+					<offset>0</offset>
+					<template>material</template>
+					<appearance>outline</appearance>
+				</layout>
+			</dataRef>
+			<dataRef>
+				<id>date_0</id>
+				<logic>
+					<behavior>editable</behavior>
+					<behavior>required</behavior>
+				</logic>
+				<layout>
+					<x>3</x>
+					<y>0</y>
+					<rows>1</rows>
+					<cols>1</cols>
+					<offset>0</offset>
+					<template>material</template>
+					<appearance>outline</appearance>
+				</layout>
+			</dataRef>
+		</dataGroup>
+		<event type="assign">
+			<id>t1_assign</id>
+			<actions phase="pre">
+				<action>
+				def existNote = findCases( { it.processIdentifier.eq("5fb3747c0a975a1b77cb1c19_notes") })
+				
+				if(!existNote){
+					createCase("5fb3747c0a975a1b77cb1c19_notes","Notes")
+				}
+            </action>
+			</actions>
+		</event>
+	</transition>
+	<!-- PLACES -->
+	<!-- ARCS -->
+</document>
